@@ -68,6 +68,9 @@ class qtype_algebra_parser_term {
     public $_formats;           // Array of format strings.
     public $_nargs;             // Number of arguments for this term.
 
+    /** @var bool  set to true then this term commutes */
+    protected $_commutes = false;
+
     /**
      * Constructor for the generic parser term.
      *
@@ -482,6 +485,15 @@ class qtype_algebra_parser_nullterm extends qtype_algebra_parser_term {
  */
 class qtype_algebra_parser_number extends qtype_algebra_parser_term {
 
+    /* @var string store minus sign for negative values */
+    protected $_sign = '';
+
+    /* @var string store base for exponent numbers */
+    protected $_base = '';
+
+    /* @var string store exponent for exponent numbers */
+    protected $_exp = '';
+
     /**
      * Constructs an instance of a number term.
      *
@@ -625,6 +637,12 @@ class qtype_algebra_parser_variable extends qtype_algebra_parser_term {
         'psi',
         'omega'
      );
+    /** @var string holds the sign of a negative number */
+    public $_sign = '';
+    /** @var string holds the base name of exponent number */
+    protected $_base = '';
+    /** @var string holds a subscipt expression */
+    protected $_subscript = '';
 
     /**
      * Constructor for an algebraic term cass representing a variable.
@@ -864,6 +882,9 @@ class qtype_algebra_parser_divide extends qtype_algebra_parser_term {
  */
 class qtype_algebra_parser_multiply extends qtype_algebra_parser_term {
 
+    /** @var array list of allowed formats */
+    protected $mformats = [];
+
     /**
      * Constructs an instance of a multiplication operator term.
      *
@@ -1047,6 +1068,9 @@ class qtype_algebra_parser_subtract extends qtype_algebra_parser_term {
  */
 class qtype_algebra_parser_special extends qtype_algebra_parser_term {
 
+    /** @var string Stores minus sign for negative values */
+    protected $_sign = '';
+
     /**
      * Constructs an instance of a special constant term.
      *
@@ -1148,6 +1172,9 @@ class qtype_algebra_parser_special extends qtype_algebra_parser_term {
  * of this subclass.
  */
 class qtype_algebra_parser_function extends qtype_algebra_parser_term {
+
+    /** @var string Stores minus sign for negative values */
+    protected $_sign = '';
 
     /**
      * Constructs an instance of a function term.
@@ -1308,6 +1335,9 @@ class qtype_algebra_parser_function extends qtype_algebra_parser_term {
  */
 class qtype_algebra_parser_bracket extends qtype_algebra_parser_term {
 
+    /** @var string Stores minus sign for negative values */
+    protected $_sign = '';
+
     public function __construct($text) {
         parent::__construct(self::NARGS, self::$formats[$text], $text);
         $this->_sign = '';
@@ -1437,6 +1467,9 @@ class qtype_algebra_parser {
     private static $expnumber = '(([0-9]+(\.|,)[0-9]*)|([0-9]+)|((\.|,)[0-9]+))E([-+]?\d+)';
     // Array to associate close brackets with the correct open bracket type.
     private static $bramap = array(')' => '(', ']' => '[', '}' => '{');
+
+    /** @var array to store tokens */
+    private $_tokens = [];
 
     /**
      * Constructor for the main parser class.
