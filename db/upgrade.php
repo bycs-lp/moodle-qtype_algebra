@@ -146,6 +146,11 @@ function xmldb_qtype_algebra_upgrade($oldversion=0) {
             $DB->update_record('qtype_algebra_options', $record);
         }
 
+        // Remove settings, which are no longer used.
+        $DB->delete_records('config', ['name' => 'qtype_algebra_host']);
+        $DB->delete_records('config', ['name' => 'qtype_algebra_port']);
+        $DB->delete_records('config', ['name' => 'qtype_algebra_uri']);
+
         // Record that qtype_algebra savepoint was reached.
         upgrade_plugin_savepoint(true, 2025070401, 'qtype', 'algebra');
     }
