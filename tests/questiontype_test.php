@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace qtype_algebra;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -32,13 +33,19 @@ require_once($CFG->dirroot . '/question/type/edit_question_form.php');
 require_once($CFG->dirroot . '/question/type/algebra/parser.php');
 require_once($CFG->dirroot . '/question/type/algebra/edit_algebra_form.php');
 
+use test_question_maker;
+use question_possible_response;
+use qtype_algebra;
+use qtype_algebra_edit_form;
+use qtype_algebra_test_helper;
+
 /**
  * Unit tests for the algebra question type class.
  *
  * @copyright  2007 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_algebra_test extends advanced_testcase {
+class questiontype_test extends \advanced_testcase {
     public static $includecoverage = array(
         'question/type/questiontypebase.php',
         'question/type/algebra/questiontype.php',
@@ -109,13 +116,13 @@ class qtype_algebra_test extends advanced_testcase {
 
         foreach ($questiondata as $property => $value) {
             if (!in_array($property, array('id', 'version', 'timemodified', 'timecreated', 'options'))) {
-                $this->assertObjectHasAttribute($property, $actualquestiondata);
+                $this->assertObjectHasProperty($property, $actualquestiondata);
             }
         }
 
         foreach ($questiondata->options as $optionname => $value) {
             if (!in_array($optionname, array('answers', 'variables'))) {
-                $this->assertObjectHasAttribute($optionname, $actualquestiondata->options);
+                $this->assertObjectHasProperty($optionname, $actualquestiondata->options);
             }
         }
 
@@ -124,7 +131,7 @@ class qtype_algebra_test extends advanced_testcase {
             foreach ($answer as $ansproperty => $ansvalue) {
                 // This question does not use 'answerformat', will ignore it.
                 if (!in_array($ansproperty, array('id', 'question', 'answerformat'))) {
-                    $this->assertObjectHasAttribute($ansproperty, $actualanswer);
+                    $this->assertObjectHasProperty($ansproperty, $actualanswer);
                 }
             }
         }
