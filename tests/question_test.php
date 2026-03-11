@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace qtype_algebra;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -29,6 +30,10 @@ global $CFG;
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
 require_once($CFG->dirroot . '/question/type/algebra/tests/helper.php');
 
+use test_question_maker;
+use question_state;
+use question_attempt_step;
+use question_classified_response;
 
 /**
  * Unit tests for the algebra question definition class.
@@ -37,7 +42,7 @@ require_once($CFG->dirroot . '/question/type/algebra/tests/helper.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class qtype_algebra_question_test extends advanced_testcase {
+class question_test extends \advanced_testcase {
     /**
      * @return qtype_formulas_question the requested question object.
      */
