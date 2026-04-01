@@ -16,6 +16,26 @@
 }
 
 /* Editing form. */
+
+body#page-question-type-algebra #fgroup_id_allowedfuncs .felement > fieldset > .d-flex {
+    gap: 0.4rem 1.5rem;
+}
+
+body#page-question-type-algebra #fgroup_id_allowedfuncs .felement > fieldset > .d-flex > br {
+    display: none;
+}
+
+body#page-question-type-algebra #fgroup_id_allowedfuncs .form-check.fitem {
+    padding-left: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+body#page-question-type-algebra #fgroup_id_allowedfuncs input[type="checkbox"].form-check-input {
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
 body#page-question-type-algebra div[id^=fgroup_id_][id*=answeroptions_] {
     background: #eee;
     margin-top: 0;
