@@ -77,25 +77,26 @@ if ($validanswer) {
 } else {
     $text = get_string('invalidanswer', 'qtype_algebra');
 }
+
+// Get the MathJax URL from the filter_mathjaxloader settings (Moodle core).
+$mathjaxurl = get_config('filter_mathjaxloader', 'httpsurl');
 ?>
 <html>
-    <head>
-        <title>Formula</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<?php
+<head>
+    <title>Formula</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <?php
 
-if (!empty($CFG->additionalhtmlhead) && stripos($CFG->additionalhtmlhead, 'MathJax') !== false) {
-    // For website where Mathjax is enabled using additional HTML in head.
-    echo $CFG->additionalhtmlhead;
-} else {
-    // For other website directly include MathJax.
-    echo "<script type=\"text/javascript\" async
-  src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML\">
-</script>";
-}
-?>
-    </head>
-    <body bgcolor="#ffffff">
-        <?php echo $text; ?>
-    </body>
+    if (!empty($CFG->additionalhtmlhead) && stripos($CFG->additionalhtmlhead, 'MathJax') !== false) {
+        // For website where Mathjax is enabled using additional HTML in head.
+        echo $CFG->additionalhtmlhead;
+    } else if (!empty($mathjaxurl)) {
+        // Use the MathJax URL configured in Moodle's filter_mathjaxloader settings.
+        echo '<script type="text/javascript" async src="' . htmlspecialchars($mathjaxurl, ENT_QUOTES, 'UTF-8') . '"></script>';
+    }
+    ?>
+</head>
+<body bgcolor="#ffffff">
+<?php echo $text; ?>
+</body>
 </html>
