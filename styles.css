@@ -15,6 +15,11 @@
     box-shadow: 0.5em 0.5em 1em #000;
 }
 
+/* Editing form - allowed functions: spacing between checkboxes. */
+body#page-question-type-algebra #fgroup_id_allowedfuncs {
+    gap: 1rem;
+}
+
 /* Editing form. */
 body#page-question-type-algebra div[id^=fgroup_id_][id*=answeroptions_] {
     background: #eee;
@@ -57,3 +62,4 @@ body#page-question-type-algebra div[id^=fitem_id_][id*=feedback_] {
     border: 1px solid #bbb;
     border-top: 0;
 }
+
