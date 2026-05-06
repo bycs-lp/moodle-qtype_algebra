@@ -89,22 +89,14 @@ class qtype_algebra_edit_form extends question_edit_form {
 
         // Create an array which will store the function checkboxes.
         $funcgroup = array();
-        // Create an array to add spacers between the boxes.
-        $spacers = array('<br>');
         // Add the initial all functions box to the list of check boxes.
         $funcgroup[] =& $mform->createElement('checkbox', 'all', '', get_string('allfunctions', 'qtype_algebra'));
         // Create a checkbox element for each function understood by the parser.
-        for ($i = 0; $i < count(qtype_algebra_parser::$functions); $i++) {
-            $func = qtype_algebra_parser::$functions[$i];
+        foreach (qtype_algebra_parser::$functions as $func) {
             $funcgroup[] =& $mform->createElement('checkbox', $func, '', $func);
-            if (($i % 6) == 5) {
-                $spacers[] = '<br>';
-            } else {
-                $spacers[] = str_repeat('&nbsp;', 8 - strlen($func));
-            }
         }
         // Create and add the group of function controls to the form.
-        $mform->addGroup($funcgroup, 'allowedfuncs', get_string('allowedfuncs', 'qtype_algebra'), $spacers, true);
+        $mform->addGroup($funcgroup, 'allowedfuncs', get_string('allowedfuncs', 'qtype_algebra'), '', true);
         $mform->addHelpButton('allowedfuncs', 'allowedfuncs', 'qtype_algebra');
         $mform->disabledif ('allowedfuncs', 'allowedfuncs[all]', 'checked');
         $mform->setDefault('allowedfuncs[all]', 'checked');
