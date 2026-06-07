@@ -87,23 +87,38 @@ class qtype_algebra_edit_form extends question_edit_form {
         $mform->addHelpButton('disallow', 'disallow', 'qtype_algebra');
         $mform->setType('disallow', PARAM_RAW);
 
-        // Create an array which will store the function checkboxes.
-        $funcgroup = array();
-        // Add the initial all functions box to the list of check boxes.
-        $funcgroup[] =& $mform->createElement('checkbox', 'all', '', get_string('allfunctions', 'qtype_algebra'));
-        // Create a checkbox element for each function understood by the parser.
+        // Build the "Allowed functions" group (MBS-7923).
+        //
+        // The visual arrangement is handled entirely by CSS (see styles.css,
+        // selector `#fgroup_id_allowedfuncs`). We intentionally do NOT inject
+        // any <br> / &nbsp; separators here, because they do not produce
+        // reliable line breaks or spacing inside the Bootstrap flex container
+        // that MoodleQuickForm renders for groups - this previously broke the
+        // layout in both Boost and theme_mebis.
+        $funcgroup = [];
+        $funcgroup[] = $mform->createElement(
+            'checkbox',
+            'all',
+            '',
+            get_string('allfunctions', 'qtype_algebra')
+        );
         foreach (qtype_algebra_parser::$functions as $func) {
-            $funcgroup[] =& $mform->createElement('checkbox', $func, '', $func);
+            $funcgroup[] = $mform->createElement('checkbox', $func, '', $func);
         }
-        // Create and add the group of function controls to the form.
-        $mform->addGroup($funcgroup, 'allowedfuncs', get_string('allowedfuncs', 'qtype_algebra'), '', true);
+        $mform->addGroup(
+            $funcgroup,
+            'allowedfuncs',
+            get_string('allowedfuncs', 'qtype_algebra'),
+            '',
+            true
+        );
         $mform->addHelpButton('allowedfuncs', 'allowedfuncs', 'qtype_algebra');
-        $mform->disabledif ('allowedfuncs', 'allowedfuncs[all]', 'checked');
+        $mform->disabledIf('allowedfuncs', 'allowedfuncs[all]', 'checked');
         $mform->setDefault('allowedfuncs[all]', 'checked');
 
         $mform->addElement('static', 'variablesinstruct',
-                get_string('variables', 'qtype_algebra'),
-                get_string('filloutonevariable', 'qtype_algebra'));
+            get_string('variables', 'qtype_algebra'),
+            get_string('filloutonevariable', 'qtype_algebra'));
 
         $this->add_variable_fields($mform);
 
