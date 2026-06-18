@@ -486,7 +486,7 @@ class qtype_algebra_parser_nullterm extends qtype_algebra_parser_term {
 class qtype_algebra_parser_number extends qtype_algebra_parser_term {
 
     /* @var string store minus sign for negative values */
-    protected $_sign = '';
+    public $_sign = '';
 
     /* @var string store base for exponent numbers */
     protected $_base = '';
@@ -640,9 +640,9 @@ class qtype_algebra_parser_variable extends qtype_algebra_parser_term {
     /** @var string holds the sign of a negative number */
     public $_sign = '';
     /** @var string holds the base name of exponent number */
-    protected $_base = '';
+    public $_base = '';
     /** @var string holds a subscipt expression */
-    protected $_subscript = '';
+    public $_subscript = '';
 
     /**
      * Constructor for an algebraic term cass representing a variable.
@@ -1068,7 +1068,7 @@ class qtype_algebra_parser_subtract extends qtype_algebra_parser_term {
 class qtype_algebra_parser_special extends qtype_algebra_parser_term {
 
     /** @var string Stores minus sign for negative values */
-    protected $_sign = '';
+    public $_sign = '';
 
     /**
      * Constructs an instance of a special constant term.
@@ -1173,7 +1173,7 @@ class qtype_algebra_parser_special extends qtype_algebra_parser_term {
 class qtype_algebra_parser_function extends qtype_algebra_parser_term {
 
     /** @var string Stores minus sign for negative values */
-    protected $_sign = '';
+    public $_sign = '';
 
     /**
      * Constructs an instance of a function term.
@@ -1335,7 +1335,7 @@ class qtype_algebra_parser_function extends qtype_algebra_parser_term {
 class qtype_algebra_parser_bracket extends qtype_algebra_parser_term {
 
     /** @var string Stores minus sign for negative values */
-    protected $_sign = '';
+    public $_sign = '';
 
     public function __construct($text) {
         parent::__construct(self::NARGS, self::$formats[$text], $text);
