@@ -23,27 +23,28 @@
  *   Row 1: Alle Funktionen, sqrt, sinh, cosh, atan, asin, acos
  *   Row 2: tan, sin, log, cos, ln
  *
- * We use CSS Grid (6 columns) on the .felement.fgroup wrapper that
- * MoodleQuickForm produces for addGroup(). CSS Grid works the same in both
- * themes, because it does not depend on Bootstrap's flex utilities or the
- * theme's checkbox layout. On narrow viewports the grid reflows so labels
- * are never cut off.
+ * MoodleQuickForm renders the group's checkboxes into a flex container inside
+ * the element's fieldset (see lib/form/templates/element-group.mustache). We
+ * turn that flex container into a 6-column CSS grid. CSS Grid works the same in
+ * both themes because it does not depend on Bootstrap's flex utilities or the
+ * theme's checkbox layout. On narrow viewports the grid reflows so labels are
+ * never cut off.
  */
-body#page-question-type-algebra #fgroup_id_allowedfuncs .felement.fgroup {
+body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0.5rem 1rem;
     align-items: center;
 }
 
-body#page-question-type-algebra #fgroup_id_allowedfuncs .felement.fgroup > .form-check,
-body#page-question-type-algebra #fgroup_id_allowedfuncs .felement.fgroup > div {
+body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div > .form-check,
+body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div > div {
     margin: 0;
     min-width: 0;
 }
 
 @media (max-width: 768px) {
-    body#page-question-type-algebra #fgroup_id_allowedfuncs .felement.fgroup {
+    body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div {
         grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
     }
 }
