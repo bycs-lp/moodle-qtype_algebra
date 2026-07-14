@@ -88,13 +88,6 @@ class qtype_algebra_edit_form extends question_edit_form {
         $mform->setType('disallow', PARAM_RAW);
 
         // Build the "Allowed functions" group (MBS-7923).
-        //
-        // The visual arrangement is handled entirely by CSS (see styles.css,
-        // selector `#fgroup_id_allowedfuncs`). We intentionally do NOT inject
-        // any <br> / &nbsp; separators here, because they do not produce
-        // reliable line breaks or spacing inside the Bootstrap flex container
-        // that MoodleQuickForm renders for groups - this previously broke the
-        // layout in both Boost and theme_mebis.
         $funcgroup = [];
         $funcgroup[] = $mform->createElement(
             'checkbox',
