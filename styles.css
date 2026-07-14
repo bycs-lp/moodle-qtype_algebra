@@ -15,6 +15,11 @@
     box-shadow: 0.5em 0.5em 1em #000;
 }
 
+/* MBS-7923 Allowed functions arrangement. */
+body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div {
+    gap: 0.5rem 1rem;
+}
+
 /* Editing form. */
 body#page-question-type-algebra div[id^=fgroup_id_][id*=answeroptions_] {
     background: #eee;
