@@ -15,38 +15,9 @@
     box-shadow: 0.5em 0.5em 1em #000;
 }
 
-/*
- * MBS-7923 - "Erlaubte Funktionen" (allowed functions) arrangement.
- *
- * The form group renders 12 checkboxes (Alle Funktionen + 11 function names).
- * Target layout, identical in Boost and theme_mebis:
- *   Row 1: Alle Funktionen, sqrt, sinh, cosh, atan, asin, acos
- *   Row 2: tan, sin, log, cos, ln
- *
- * MoodleQuickForm renders the group's checkboxes into a flex container inside
- * the element's fieldset (see lib/form/templates/element-group.mustache). We
- * turn that flex container into a 6-column CSS grid. CSS Grid works the same in
- * both themes because it does not depend on Bootstrap's flex utilities or the
- * theme's checkbox layout. On narrow viewports the grid reflows so labels are
- * never cut off.
- */
+/* MBS-7923 Allowed functions arrangement. */
 body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0.5rem 1rem;
-    align-items: center;
-}
-
-body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div > .form-check,
-body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div > div {
-    margin: 0;
-    min-width: 0;
-}
-
-@media (max-width: 768px) {
-    body#page-question-type-algebra #fitem_id_allowedfuncs .felement fieldset > div {
-        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
-    }
 }
 
 /* Editing form. */
