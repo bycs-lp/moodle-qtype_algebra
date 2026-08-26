@@ -86,6 +86,11 @@ if ($validanswer) {
 
 // Get the MathJax URL from the filter_mathjaxloader settings (Moodle core).
 $mathjaxurl = get_config('filter_mathjaxloader', 'httpsurl');
+$mathjaxconfig = (string) get_config('filter_mathjaxloader', 'mathjaxconfig');
+if ($mathjaxconfig !== '') {
+    echo '<script type="text/javascript">window.MathJax = ' . $mathjaxconfig . ';</script>';
+}
+
 if (!empty($CFG->additionalhtmlhead) && stripos($CFG->additionalhtmlhead, 'MathJax') !== false) {
     // For website where Mathjax is enabled using additional HTML in head.
     echo $CFG->additionalhtmlhead;
